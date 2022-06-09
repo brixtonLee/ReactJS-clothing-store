@@ -1,6 +1,9 @@
 import React from "react";
 import './menu-item.styles.scss';
-export const MenuItem = ({title, imageUrl}) => (
+
+export const MenuItem = ({title, imageUrl}) => {
+
+    return(
     <div className="menu-item">
         <div className="background-image" style={{backgroundImage: `url(${imageUrl})`}}/>
 
@@ -9,4 +12,4 @@ export const MenuItem = ({title, imageUrl}) => (
             <span className="subtitle">SHOP NOW</span>
         </div>
     </div>
-)
+)}
