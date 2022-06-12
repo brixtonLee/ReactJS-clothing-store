@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "node-sass": "^7.0.1",
+    "redux-persist": "^6.0.0",
     "reselect": "^4.1.6"
   }
 }

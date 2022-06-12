@@ -10,8 +10,14 @@ import logger from 'redux-logger';
 
 import reducers from "./root-reducer";
 
+//Redux persist
+import { persistStore } from "redux-persist";
+
 const middlewares = [logger];
 
-const store = configureStore({reducer: reducers, middleware: middlewares});
+export const store = configureStore({reducer: reducers, middleware: middlewares});
 
-export default store;
+//Redux persist
+export const persistor = persistStore(store)
+
+export default {store, persistor};
