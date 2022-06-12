@@ -7,6 +7,16 @@ import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 import './sign-up.styles.scss';
 
+/*
+    Redux:
+    1. Reducer is the function that hold the state
+    2. Root Reducer is the function that hold all the small reducer (App State)
+    3. Small Reducer E.g Home Reducer, Shop Reducer is the slice of state that is related
+    4. You need to reassign the object with the new property in order for the component to re-render
+
+    Redux Implementation:
+    1. yarn add redux-logger react-redux
+*/
 class SignUp extends React.Component{
     constructor(){
         super();
@@ -20,7 +30,6 @@ class SignUp extends React.Component{
     }
 
     handleSubmit = async event => {
-        console.log('hi');
         event.preventDefault();
         const {displayName, email, password, confirmPassword} = this.state;
 
