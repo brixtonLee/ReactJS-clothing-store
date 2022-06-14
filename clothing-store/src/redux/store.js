@@ -5,7 +5,7 @@
     3. declare the store with reducers and middleware
 */
 
-import { configureStore, applyMiddleware} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import logger from 'redux-logger';
 
 import reducers from "./root-reducer";

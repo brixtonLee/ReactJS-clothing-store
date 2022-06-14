@@ -20,7 +20,7 @@ const CartIcon = ({toggleCartHidden, itemCount}) => (
     Reduce In JavaScript
     1. It will return one value only
     2. The first param is the function, the second param is the starting value
-    3. The function has two quantity which is total and the other attributes
+    3. The function has two params which are total and any
     4. If only return total, it will only return the first value of the array
 */
 
