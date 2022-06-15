@@ -17,6 +17,8 @@ import { setCurrentUser } from './redux/user/user.actions';
 //Selector
 import { selectCurrentUser } from './redux/user/user.selector';
 import {createStructuredSelector} from 'reselect';
+import { CollectionPreview } from './components/collection-preview/collection-preview.component';
+import CollectionComponent from './components/collection/collection.component';
 class App extends React.Component {
   //If we are using redux, we dont need to have the constructor anymore
   // constructor() {
@@ -88,6 +90,8 @@ class App extends React.Component {
         <Routes>
           <Route path='/' element={<Homepage/>}/>
           <Route path='/shop' element={<ShopPage/>}/>
+          <Route path='/shop/:categoryID' element={<CollectionComponent/>}/>
+
           {/* Render is like the javascript invokation */}
           <Route path='/signIn' element={this.props.currentUser ? <Navigate to='/' replace/> : <SignInAndSignUp/>}/>
           <Route path='/checkOut' element={<CheckOutPage/>}/>

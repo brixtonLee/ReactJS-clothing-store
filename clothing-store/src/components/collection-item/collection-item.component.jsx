@@ -11,7 +11,6 @@ import { addCartItem } from "../../redux/cart/cart.actions";
 
 const CollectionItem = ({item, addCartItem}) => {
     const {name, price, imageUrl} = item;
-    console.log(item);
     return(
     <div className="collection-item">
         <div className="image" style={{backgroundImage: `url(${imageUrl})`}}/>

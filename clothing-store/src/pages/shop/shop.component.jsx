@@ -6,15 +6,19 @@ import { CollectionPreview } from "../../components/collection-preview/collectio
 import { connect } from "react-redux";
 import {createStructuredSelector} from 'reselect';
 
-import { selectCollection } from "../../redux/shop/shop.selector";
+import { selectCollections } from "../../redux/shop/shop.selector";
+
+import { Route, Routes} from "react-router-dom";
 
 import CollectionOverviewComponent from "../../components/collection-overview/collection-overview.component";
-const ShopPage = ({collections}) => (
-    <div className="shop-page">
-        <CollectionOverviewComponent/>
-    </div>
+const ShopPage = ({collections}) => {
 
-);
+    return(
+        <div className="shop-page">
+            <CollectionOverviewComponent/>
+        </div>
+    )
+};
     // constructor(props){
     //     super(props);
 
@@ -24,6 +28,6 @@ const ShopPage = ({collections}) => (
     // }
 
 const mapStateToProps = createStructuredSelector({
-    collections: selectCollection
+    collections: selectCollections
 })
 export default connect(mapStateToProps)(ShopPage);
