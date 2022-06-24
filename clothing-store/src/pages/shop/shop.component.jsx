@@ -1,23 +1,58 @@
 import React from "react";
 
-
 import { CollectionPreview } from "../../components/collection-preview/collection-preview.component";
-
-import { connect } from "react-redux";
-import {createStructuredSelector} from 'reselect';
 
 import { selectCollections } from "../../redux/shop/shop.selector";
 
-import { Route, Routes} from "react-router-dom";
 
+//firebase
+import {firestore, convertCollecitonsSnapShotToMaps} from "../../firebase/firebase.utils";
 import CollectionOverviewComponent from "../../components/collection-overview/collection-overview.component";
-const ShopPage = ({collections}) => {
 
-    return(
-        <div className="shop-page">
-            <CollectionOverviewComponent/>
-        </div>
-    )
+import { connect } from "react-redux";
+import { updateCollections } from "../../redux/shop/shop.actions";
+
+// import { fetchCollectionStartAsync } from "../../redux/shop/shop.actions";
+import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
+import { selectISCollectionsFetching } from "../../redux/shop/shop.selector";
+import {createStructuredSelector} from 'reselect';
+
+class ShopPage extends React.Component {
+
+    // unsubscribeFromSnapShot = null;
+
+    //If we are querying from the firebase, meaning that we are subscribing to their service, hence we must remember to close it
+
+    // componentDidMount(){
+    //     const {updateCollections} = this.props;
+    //     const collectionRef = firestore.collection('collections');
+    //     this.unsubscribeFromSnapShot = collectionRef.onSnapshot(async snapshot => {
+    //         const collectionsMap = convertCollecitonsSnapShotToMaps(snapshot);
+    //         console.log(collectionsMap);
+    //         updateCollections(collectionsMap);
+
+    // Promise Pattern
+    //     const collectionRef = firestore.collection('collections');
+    //     collectionRef.get().then(snapshot => {
+    //         const collectionsMap = convertCollecitonsSnapShotToMaps(snapshot);
+    //         console.log(collectionsMap);
+    //         updateCollections(collectionsMap);
+    //     });
+    // }
+
+    //Redux Thunk
+    componentDidMount(){
+        const {fetchCollectionsStart} = this.props
+        fetchCollectionsStart();
+    }
+
+    render(){
+        return(
+            <div className="shop-page">
+                <CollectionOverviewComponent/>
+            </div>
+        )
+    }
 };
     // constructor(props){
     //     super(props);
@@ -28,6 +63,11 @@ const ShopPage = ({collections}) => {
     // }
 
 const mapStateToProps = createStructuredSelector({
-    collections: selectCollections
+    isCollectionFetching: selectISCollectionsFetching
 })
-export default connect(mapStateToProps)(ShopPage);
+
+const mapDispatchToProps = dispatch => ({
+    fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);

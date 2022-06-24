@@ -10,7 +10,7 @@
 
 
 
-//In firebaseversion 9, it is imported firebase/compat/app, not firebase/app
+//In firebase version 9, it is imported firebase/compat/app, not firebase/app
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
@@ -34,13 +34,23 @@ const config = {
   export const firestore = firebase.firestore();
 
   //Authentication provider
-  const provider = new firebase.auth.GoogleAuthProvider();
+  export const googleProvider = new firebase.auth.GoogleAuthProvider();
   //Custom parameter for provider
   //This line will trigger the google account sign in
-  provider.setCustomParameters({prompt: 'select_account'});
+  googleProvider.setCustomParameters({prompt: 'select_account'});
+
+  //Mimic Persistence
+  export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = auth.onAuthStateChanged(userAuth => {
+        unsubscribe();
+        resolve(userAuth);
+      }, reject)
+    })
+  }
 
   //The sign in with popup method will trigger only google account sign in
-  export const signInWithGoogle = () => auth.signInWithPopup(provider);
+  export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
   export const createUserProfileDocument = async (userAuth, additionalData) => {
     if(!userAuth) return;
@@ -69,6 +79,39 @@ const config = {
       }
     }
     return userRef;
+  }
+
+  export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey);
+    //Batch Writing to prevent half way save due to any failure
+    const batch = firestore.batch();
+    objectsToAdd.forEach(obj => {
+      //This line can generate a new id for each document
+      const newDocumentRef = collectionRef.doc();
+      batch.set(newDocumentRef, obj);
+    });
+
+    //This line will fire off the batch request and return us the promise
+    return await batch.commit();
+  }
+
+  export const convertCollecitonsSnapShotToMaps = (collections) => {
+    const transformCollection = collections.docs.map(doc => {
+      const {title, items, routeName} = doc.data();
+      return {
+          routeName: encodeURI(routeName),
+          id: doc.id,
+          title,
+          items
+      };
+    });
+    return transformCollection.reduce((accumulator, collection) => {
+
+      accumulator[collection.title.toLowerCase()] = collection;
+
+      return accumulator;
+    }, {})
+    
   }
 
   export default firebase;

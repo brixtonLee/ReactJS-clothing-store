@@ -13,12 +13,6 @@ import { useSelector } from "react-redux";
 
 
 const Collection = ({collections}) => {
-    
-    const params = useParams();
-    const categoryName = params["categoryID"];
-    console.log(state);
-    const collection = useSelector((state) => state.collections[categoryName]);
-    console.log(collection);
     return(
         <div className="category">
             <h2>Category page</h2>
