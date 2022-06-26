@@ -11,7 +11,6 @@ import './collection-overview.styles.scss';
 
 const CollectionOverview = ({collections}) => {
     collections = Object.values(collections);
-    console.log(collections);
     return(
         <div className="collections-overview">
             {

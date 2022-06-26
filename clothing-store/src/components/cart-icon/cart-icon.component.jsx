@@ -16,20 +16,6 @@ const CartIcon = ({toggleCartHidden, itemCount}) => (
             <span className="item-count">{itemCount}</span>
         </div>
 );
-/*
-    Reduce In JavaScript
-    1. It will return one value only
-    2. The first param is the function, the second param is the starting value
-    3. The function has two params which are total and any
-    4. If only return total, it will only return the first value of the array
-*/
-
-/* 
-    1. Whenever the reducer action is called and update the state (return the whole new object)
-    2. The mapStateToProps function is called every single time
-    3. Hence it will re-render the component
-*/
-
 //Before Selector
 // const mapStateToProps = ({cart: {cartItems}}) => ({
 //     itemCount: cartItems.reduce((accumulatedQuantity, cartItems) => accumulatedQuantity + cartItems.quantity, 0)
@@ -40,6 +26,7 @@ const CartIcon = ({toggleCartHidden, itemCount}) => (
 const mapStateToProps = state => ({
     itemCount: selectCartItemsCount(state)
 })
+
 const mapDispatchToProps = dispatch => ({
     toggleCartHidden: () => dispatch(toggleCartHidden())
 })

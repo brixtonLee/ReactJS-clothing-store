@@ -5,6 +5,8 @@ import { CollectionPreview } from "../../components/collection-preview/collectio
 import { selectCollections } from "../../redux/shop/shop.selector";
 
 
+
+
 //firebase
 import {firestore, convertCollecitonsSnapShotToMaps} from "../../firebase/firebase.utils";
 import CollectionOverviewComponent from "../../components/collection-overview/collection-overview.component";
@@ -16,8 +18,9 @@ import { updateCollections } from "../../redux/shop/shop.actions";
 import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 import { selectISCollectionsFetching } from "../../redux/shop/shop.selector";
 import {createStructuredSelector} from 'reselect';
+import { useEffect } from "react";
 
-class ShopPage extends React.Component {
+const ShopPage = ({fetchCollectionsStart}) => {
 
     // unsubscribeFromSnapShot = null;
 
@@ -39,20 +42,20 @@ class ShopPage extends React.Component {
     //         updateCollections(collectionsMap);
     //     });
     // }
-
+    useEffect(() => {fetchCollectionsStart()}, [fetchCollectionsStart])
     //Redux Thunk
-    componentDidMount(){
-        const {fetchCollectionsStart} = this.props
-        fetchCollectionsStart();
-    }
+    // componentDidMount(){
+    //     const {fetchCollectionsStart} = this.props
+    //     fetchCollectionsStart();
+    // }
 
-    render(){
+    // render(){
         return(
             <div className="shop-page">
                 <CollectionOverviewComponent/>
             </div>
         )
-    }
+    // }
 };
     // constructor(props){
     //     super(props);

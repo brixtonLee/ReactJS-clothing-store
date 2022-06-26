@@ -1,18 +1,20 @@
+//This is the must to create the component
 import React from "react";
+import './cart-dropdown.styles.scss';
 
 import { CustomButton } from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
 
 import { Link } from "react-router-dom";
 
-import './cart-dropdown.styles.scss';
-
 //Redux
 import { connect } from "react-redux";
 
 //Selector
+import { createStructuredSelector } from 'reselect';
 import { selectCartItems } from "../../redux/cart/cart.selector";
-import {createStructuredSelector} from 'reselect';
+
+
 const CartDropDown = ({cartItems}) => (
     <div className="cart-dropdown">
         <div className="cart-items">
@@ -41,8 +43,4 @@ const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems
 })
 
-/*
-    1. For any state changed in any reducers, it will fire all the mapStateToProps actions and re-render the component due to the assignment of the new object
-    2. Therefore, by using selector, we can prevent the mapStateToProps from being fired while any state that is unrelated changed in other reducers and improve the performance.
-*/
 export default connect(mapStateToProps, null)(CartDropDown)
