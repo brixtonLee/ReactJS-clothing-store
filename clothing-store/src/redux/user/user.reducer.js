@@ -1,10 +1,4 @@
-/**
-  Redux Reducer:
-  1. Reducer is the function that has two arguments which are (state, action)
-  2. action is the object that has the type (specific type of action), payload (anything)
-  3. The state is going to be something (current state) that redux store is going to pass to the reducer whenever the action get fired
-  4. We have to set the INITIAL STATE for the reducer for the purpose of first time
- */
+
 
 
 import UserActionTypes from "./user.types";

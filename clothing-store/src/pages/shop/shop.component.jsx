@@ -4,9 +4,6 @@ import { CollectionPreview } from "../../components/collection-preview/collectio
 
 import { selectCollections } from "../../redux/shop/shop.selector";
 
-
-
-
 //firebase
 import {firestore, convertCollecitonsSnapShotToMaps} from "../../firebase/firebase.utils";
 import CollectionOverviewComponent from "../../components/collection-overview/collection-overview.component";

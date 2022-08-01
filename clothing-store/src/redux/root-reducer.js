@@ -1,7 +1,6 @@
-/**
+/*
     Root Reducer:
     1. Root Reducer represents all reducer / consists of all small reducer
-    2. 
  */
 import { combineReducers } from '@reduxjs/toolkit';
 
@@ -11,10 +10,10 @@ import { combineReducers } from '@reduxjs/toolkit';
 */
 import { persistReducer } from 'redux-persist';
 
-// Using Local Storage
+// Using Local Storage for Redux persist
 import storage from 'redux-persist/lib/storage';
 
-// Using session storage
+// Using session storage for Redux persist
 // import sessionStorage from 'redux-persist/es/storage/session';
 
 

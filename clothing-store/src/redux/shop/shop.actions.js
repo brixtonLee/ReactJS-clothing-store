@@ -56,6 +56,7 @@ export const fetchCollectionStartAsync = () => {
 /*
     Generator Function
     1. it is declared as function* functionName
-    2. Yield: it is called line by line when the genName.next() is called
+    2. Yield is like await keyword that put the execution in the background until the gen.next() is called again until done
+    3. Yield: it is called line by line when the genName.next() is called
     3. Until the done is true, then the generator function is completed
 */

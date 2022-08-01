@@ -1,21 +1,36 @@
 //This is the must to create the component
 import React from "react";
 import './cart-dropdown.styles.scss';
-
+import { useParams } from "react-router-dom";
 import { CustomButton } from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
 
 import { Link } from "react-router-dom";
 
 //Redux
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 //Selector
 import { createStructuredSelector } from 'reselect';
 import { selectCartItems } from "../../redux/cart/cart.selector";
+import { selectCollection } from "../../redux/shop/shop.selector";
 
+// Normal React Redux
+// const CartDropDown = ({cartItems}) => (
 
-const CartDropDown = ({cartItems}) => (
+//React Hooks Solution
+const CartDropDown = () => {
+    const cartItems = useSelector(selectCartItems);
+
+    //useParams
+    const params = useParams();
+    //with desturcturing
+    const {collectionId} = useParams();
+
+    // //To pass the params into the selector
+    // const collection = useSelector(selectCollection(collectionId))
+    return(
+
     <div className="cart-dropdown">
         <div className="cart-items">
             {
@@ -28,6 +43,7 @@ const CartDropDown = ({cartItems}) => (
         
     </div>
 )
+}
 // The first cart is referring to the name of the reducer in the root reducer, the second is the property inside the cart reducer (Advance Destructuring)
 //Before selector
 // const mapStateToProps = ({cart: {cartItems}}) => ({
@@ -43,4 +59,8 @@ const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems
 })
 
-export default connect(mapStateToProps, null)(CartDropDown)
+//Normal React Redux
+// export default connect(mapStateToProps, null)(CartDropDown)
+
+//React Hooks Solution
+export default CartDropDown;
