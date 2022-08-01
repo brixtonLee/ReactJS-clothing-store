@@ -1,4 +1,4 @@
-# Crown Clothing Store
+# Clothing Store
 
 ## General Info
 This clothing store is built using ReactJS as the front-end and Firebase as the backend
